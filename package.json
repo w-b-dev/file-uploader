@@ -1,7 +1,7 @@
 {
   "name": "node-file-upload",
   "version": "1.0.0",
-  "description": "",
+  "description": "create a file uploader that generates time expiring url to retrieve the asset",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
