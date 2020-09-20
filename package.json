@@ -4,7 +4,8 @@
   "description": "create a file uploader that generates time expiring url to retrieve the asset",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./dist/index.js",
+    "prestart": "tsc"
   },
   "keywords": [],
   "author": "",
