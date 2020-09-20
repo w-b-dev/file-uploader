@@ -2,12 +2,28 @@ import multer from "multer";
 import express from "express";
 import cors from "cors";
 
-const DB_NAME = "db.json";
-const COLLECTION_PATH = "images";
 const UPLOAD_PATH = "uploads";
-const upload = multer({ dest: `${UPLOAD_PATH}/` });
-// const db = new Loki(`${UPLOAD_PATH}/${DB_NAME}}`, { persistenceMethod: "fs" });
+const storage = multer.diskStorage({
+  destination: `${UPLOAD_PATH}/`,
+  filename: (req, file, cb) => {
+    cb(null, file.originalname.replace(/\s/g, ""));
+  },
+});
+const upload = multer({ storage });
 
 const app = express();
 app.use(cors());
 app.listen(3000, () => console.log("Listening 3000"));
+
+// route
+app.post("/upload", upload.single("image"), async (req, res) => {
+  try {
+    console.log(req.file);
+    res.send({
+      id: Date.now(),
+      filename: req.file.originalname.replace(/\s/g, ""),
+    });
+  } catch (error) {
+    res.sendStatus(400);
+  }
+});
